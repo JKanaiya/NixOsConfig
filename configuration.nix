@@ -1,20 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -72,9 +73,9 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "jonathan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -84,22 +85,94 @@
   programs.zsh.enable = true;
 
   programs.steam = {
-	enable = true;
-	extraCompatPackages = [ pkgs.proton-ge-bin ];
-};
+    enable = true;
+    extraCompatPackages = [pkgs.proton-ge-bin];
+  };
 
-fonts.packages = with pkgs; [
-  noto-fonts
-  noto-fonts-cjk-sans
-  noto-fonts-color-emoji
-  liberation_ttf
-  fira-code
-  fira-code-symbols
-  mplus-outline-fonts.githubRelease
-  dina-font
-  proggyfonts
-];
+  programs.nvf = {
+    enable = true;
 
+    settings = {
+      vim = {
+        theme = {
+          enable = true;
+          name = "gruvbox";
+          style = "dark";
+        };
+
+        formatter = {
+          conform-nvim.enable = true;
+        };
+
+        additionalRuntimePaths = [
+          ./nvim
+          (builtins.path {
+            path = ./nvim;
+            name = "oldConf";
+          })
+        ];
+
+        diagnostics.nvim-lint = {
+          enable = true;
+        };
+
+        lsp.formatOnSave = true;
+
+        options = {
+          autoindent = true;
+          wrap = true;
+          shiftwidth = 4;
+        };
+
+        syntaxHighlighting = true;
+
+        withNodeJs = true;
+
+        statusline.lualine.enable = true;
+        telescope.enable = true;
+        git.enable = true;
+        autocomplete.nvim-cmp.enable = true;
+
+        languages = {
+          enableLSP = true;
+          enableTreesitter = true;
+          enableFormat = true;
+          enableDAP = true;
+
+          nix.enable = true;
+          css.enable = true;
+          bash.enable = true;
+          ts = {
+            enable = true;
+            format = {
+              enable = true;
+            };
+          };
+          python.enable = true;
+        };
+
+        mini = {
+          clue.enable = true;
+          comment.enable = true;
+          completion.enable = true;
+          pairs.enable = true;
+          surround.enable = true;
+        };
+      };
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -119,7 +192,7 @@ fonts.packages = with pkgs; [
     curlie
     fd
     git
-    ];
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -147,5 +220,4 @@ fonts.packages = with pkgs; [
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }

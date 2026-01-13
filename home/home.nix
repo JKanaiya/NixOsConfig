@@ -14,28 +14,23 @@
     # home.nix
     # inputs.zen-browser.homeModules.beta
     inputs.zen-browser.homeModules.twilight
-    inputs.nixvim.homeModules.nixvim
+    # inputs.nixvim.homeModules.nixvim
     # or inputs.zen-browser.homeModules.twilight-official
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
 
-  programs.nixvim.imports = [ ./dev/nixvim.nix ];
+  # programs.nixvim.imports = [ ./dev/nixvim.nix ];
 
   programs.zen-browser.enable = true;
 
-  programs.nixvim.enable = true;
-
-  programs.neovim = {
-  enable = true;
-  extraLuaConfig = ''
-  ${builtins.readFile /home/jonathan/nvim/init.lua}
-	'';
-  extraConfig = ''
-    set number relativenumber
-  '';
-};
-
+  # programs.nixvim = {
+  # enable = true;
+  #   # imports = [ inputs.Neve.nixvimModule ];
+  # # Then configure Nixvim as usual, you might have to lib.mkForce some of the settings
+  # colorschemes.catppuccin.enable = lib.mkForce false;
+  # colorschemes.nord.enable = true;
+  # };
 
   nixpkgs = {
     # You can add overlays here
@@ -60,13 +55,13 @@
   };
 
   home = {
-	username = "jonathan";
-  	homeDirectory = "/home/jonathan";
+    username = "jonathan";
+    homeDirectory = "/home/jonathan";
   };
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
@@ -90,12 +85,13 @@
     # networking tools
     mtr # A network diagnostic tool
     iperf3
-    dnsutils  # `dig` + `nslookup`
+    eslint
+    dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
 
     # misc
     cowsay
@@ -103,10 +99,13 @@
     which
     tree
     gnused
+    gamemode
     gnutar
     gawk
     zstd
     gnupg
+    python315
+    nodejs_24
 
     # nix related
     #
@@ -118,7 +117,7 @@
     hugo # static site generator
     glow # markdown previewer in terminal
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -127,6 +126,17 @@
     ltrace # library call monitoring
     lsof # list open files
 
+    # zsh
+    zsh-autocomplete
+    zsh-autosuggestions
+    zsh-completions
+    zsh-fast-syntax-highlighting
+    zsh-z
+    zsh-history-search-multi-word
+    pay-respects
+    zsh-history-substring-search
+    zsh-powerlevel10k
+
     # system tools
     sysstat
     lm_sensors # for `sensors` command
@@ -134,7 +144,7 @@
     pciutils # lspci
     usbutils # lsusb
     # inputs.zen-browser.packages."${system}".specific
- ];
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -143,6 +153,44 @@
     userName = "JKanaiya";
     userEmail = "jonathankanaiya@gmail.com";
   };
+  programs.pay-respects.enable = true;
+
+  programs.zsh = {
+    # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = ./.; # Assumes p10k.zsh is in the same folder as home.nix
+        file = "p10k.zsh";
+      }
+    ];
+
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
+
+    initContent = ''
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    '';
+
+    history.size = 10000;
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = ["git" "z" "history-search-multi-word" "history-substring-search"];
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
@@ -150,4 +198,3 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";
 }
-
