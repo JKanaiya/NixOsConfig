@@ -17,12 +17,15 @@
     # inputs.nixvim.homeModules.nixvim
     # or inputs.zen-browser.homeModules.twilight-official
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
   ];
 
   # programs.nixvim.imports = [ ./dev/nixvim.nix ];
 
+  programs.nvf.imports = [./dev/nvf.nix];
+
   programs.zen-browser.enable = true;
+  programs.obsidian.enable = true;
+  programs.zathura.enable = true;
 
   # programs.nixvim = {
   # enable = true;
@@ -57,6 +60,13 @@
   home = {
     username = "jonathan";
     homeDirectory = "/home/jonathan";
+    pointerCursor = {
+      gtk.enable = true;
+      # x11.enable = true; # Enable if using an X11 window manager
+      package = pkgs.rose-pine-cursor;
+      name = "Everfrost-Cursors"; # The internal name of the theme
+      size = 24;
+    };
   };
 
   # Add stuff for your user as you see fit:
@@ -64,6 +74,7 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
+    obsidian
 
     neofetch
     nnn # terminal file manager
@@ -74,6 +85,9 @@
     unzip
     p7zip
     gh
+    syncthing
+    localsend
+    zathura
 
     # utils
     ripgrep # recursively searches directories for a regex pattern
@@ -126,17 +140,6 @@
     ltrace # library call monitoring
     lsof # list open files
 
-    # zsh
-    zsh-autocomplete
-    zsh-autosuggestions
-    zsh-completions
-    zsh-fast-syntax-highlighting
-    zsh-z
-    zsh-history-search-multi-word
-    pay-respects
-    zsh-history-substring-search
-    zsh-powerlevel10k
-
     # system tools
     sysstat
     lm_sensors # for `sensors` command
@@ -150,48 +153,13 @@
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "JKanaiya";
-    userEmail = "jonathankanaiya@gmail.com";
-  };
-  programs.pay-respects.enable = true;
-
-  programs.zsh = {
-    # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = ./.; # Assumes p10k.zsh is in the same folder as home.nix
-        file = "p10k.zsh";
-      }
-    ];
-
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
+    settings.user = {
+      email = "jonathankanaiya@gmail.com";
+      name = "JKanaiya";
     };
-
-    initContent = ''
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
-
-    history.size = 10000;
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = ["git" "z" "history-search-multi-word" "history-substring-search"];
-    };
+    # userName = "JKanaiya";
+    # userEmail = "jonathankanaiya@gmail.com";
   };
-
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

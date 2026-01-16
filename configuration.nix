@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -37,13 +38,40 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.graphics.enable = true;
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+  };
+
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+            esc = "capslock";
+          };
+        };
+      };
+    };
   };
 
   # Enable CUPS to print documents.
@@ -96,32 +124,126 @@
       vim = {
         theme = {
           enable = true;
-          name = "gruvbox";
-          style = "dark";
+          name = "rose-pine";
+          style = "main";
         };
+
+        globals = {
+          mapleader = " ";
+          maplocalleader = " ";
+        };
+
+        binds.whichKey.enable = true;
+
+        treesitter = {
+          enable = true;
+          highlight.enable = true;
+          indent.enable = true;
+          context.enable = true;
+          autotagHtml = true;
+        };
+
+        snippets = {
+          luasnip.enable = true;
+        };
+
+        diagnostics = {
+          enable = true;
+          config = {
+            virtual_lines = {
+              enable = true;
+              current_line = true;
+            };
+          };
+        };
+
+        visuals = {
+          nvim-cursorline.enable = true;
+          # indent-blankline.enable = true;
+        };
+
+        terminal = {
+          toggleterm = {
+            enable = true;
+            mappings.open = "<C-\\>";
+            setupOpts.direction = "float";
+          };
+        };
+
+        telescope = {
+          enable = true;
+          extensions = [
+            {
+              name = "ui-select";
+              packages = [pkgs.vimPlugins.telescope-ui-select-nvim];
+            }
+          ];
+        };
+
+        utility = {
+          sleuth.enable = true;
+          oil-nvim = {
+            enable = true;
+            gitStatus.enable = true;
+          };
+        };
+
+        keymaps = [
+          {
+            key = "\\\\";
+            mode = "n";
+            action = "<cmd>Oil<CR>";
+          }
+          {
+            key = "<Esc>";
+            mode = "n";
+            action = "<cmd>nohlsearch<CR>";
+          }
+          # -- Keybinds to make split navigation easier.
+          # --  Use CTRL+<hjkl> to switch between windows
+          {
+            mode = "n";
+            key = "<C-h>";
+            action = "<C-w><C-h>";
+          }
+          {
+            mode = "n";
+            key = "<C-l>";
+            action = "<C-w><C-l>";
+          }
+          {
+            mode = "n";
+            key = "<C-j>";
+            action = "<C-w><C-j>";
+          }
+          {
+            mode = "n";
+            key = "<C-k>";
+            action = "<C-w><C-k>";
+          }
+        ];
 
         formatter = {
           conform-nvim.enable = true;
         };
 
-        additionalRuntimePaths = [
-          ./nvim
-          (builtins.path {
-            path = ./nvim;
-            name = "oldConf";
-          })
-        ];
-
         diagnostics.nvim-lint = {
           enable = true;
         };
 
-        lsp.formatOnSave = true;
+        lsp = {
+          enable = true;
+          formatOnSave = true;
+          servers = {
+            typescript.cmd = lib.mkForce ["typescript-language-server"];
+          };
+        };
 
         options = {
-          autoindent = true;
-          wrap = true;
+          # wrap = true;
+          smartindent = true;
           shiftwidth = 4;
+          scrolloff = 10;
         };
 
         syntaxHighlighting = true;
@@ -129,12 +251,10 @@
         withNodeJs = true;
 
         statusline.lualine.enable = true;
-        telescope.enable = true;
         git.enable = true;
         autocomplete.nvim-cmp.enable = true;
 
         languages = {
-          enableLSP = true;
           enableTreesitter = true;
           enableFormat = true;
           enableDAP = true;
@@ -142,19 +262,20 @@
           nix.enable = true;
           css.enable = true;
           bash.enable = true;
-          ts = {
-            enable = true;
-            format = {
-              enable = true;
-            };
-          };
+          # ts = {
+          #   enable = true;
+          #   # extensions = ["tsx" "typescript"];
+          #   format = {
+          #     enable = true;
+          #   };
+          # };
           python.enable = true;
         };
 
         mini = {
           clue.enable = true;
           comment.enable = true;
-          completion.enable = true;
+          # completion.enable = true;
           pairs.enable = true;
           surround.enable = true;
         };
@@ -192,6 +313,7 @@
     curlie
     fd
     git
+    everforest-cursors
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
