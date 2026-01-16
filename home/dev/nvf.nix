@@ -1,10 +1,10 @@
 {
-  lib,
   pkgs,
+  lib,
+  config,
   ...
 }: {
-  imports = [];
-
+  # imports = [];
   programs.nvf = {
     enable = true;
 
@@ -123,7 +123,7 @@
           enable = true;
           formatOnSave = true;
           servers = {
-            typescript.cmd = lib.mkForce ["typescript-language-server"];
+            typescript.cmd = lib.mkForce ["typescript-language-server" "--sdio"];
           };
         };
 

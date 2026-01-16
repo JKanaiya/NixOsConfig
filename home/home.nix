@@ -14,14 +14,13 @@
     # home.nix
     # inputs.zen-browser.homeModules.beta
     inputs.zen-browser.homeModules.twilight
+    inputs.nvf.homeManagerModules.default
     # inputs.nixvim.homeModules.nixvim
     # or inputs.zen-browser.homeModules.twilight-official
     # You can also split up your configuration and import pieces of it here:
+    ./dev/nvf.nix
+    ./env/zsh.nix
   ];
-
-  # programs.nixvim.imports = [ ./dev/nixvim.nix ];
-
-  programs.nvf.imports = [./dev/nvf.nix];
 
   programs.zen-browser.enable = true;
   programs.obsidian.enable = true;
@@ -118,8 +117,8 @@
     gawk
     zstd
     gnupg
-    python315
-    nodejs_24
+    # python315
+    # nodejs_24
 
     # nix related
     #
@@ -157,12 +156,10 @@
       email = "jonathankanaiya@gmail.com";
       name = "JKanaiya";
     };
-    # userName = "JKanaiya";
-    # userEmail = "jonathankanaiya@gmail.com";
   };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 }
