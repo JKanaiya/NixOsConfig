@@ -157,6 +157,12 @@
       name = "JKanaiya";
     };
   };
+  # SSH Key added to identity
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
