@@ -21,18 +21,10 @@
           maplocalleader = " ";
         };
 
-        extraPlugins = {
-          vim-prisma = {
-            package = pkgs.vimPlugins.vim-prisma;
-            # setup = "require('vim-prisma').setup {}";
-          };
-        };
-
         binds.whichKey.enable = true;
 
         treesitter = {
           enable = true;
-
           highlight.enable = true;
           indent.enable = true;
           context.enable = true;
@@ -131,14 +123,7 @@
           enable = true;
           formatOnSave = true;
           servers = {
-            # typescript.cmd = lib.mkForce ["typescript-language-server" "--stdio"];
-            # "typescript-language-server" = {
-            #   filetypes = ["ts"];
-            # };
-            # prisma.cmd = lib.mkForce ["prisma-language-server" "--stdio"];
-            "prisma-language-server" = {
-              filetypes = ["prisma"];
-            };
+            typescript.cmd = lib.mkForce ["typescript-language-server" "--sdio"];
           };
         };
 
@@ -165,12 +150,13 @@
           nix.enable = true;
           css.enable = true;
           bash.enable = true;
-          ts = {
-            enable = true;
-            format = {
-              enable = true;
-            };
-          };
+          # ts = {
+          #   enable = true;
+          #   # extensions = ["tsx" "typescript"];
+          #   format = {
+          #     enable = true;
+          #   };
+          # };
           python.enable = true;
         };
 

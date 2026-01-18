@@ -112,13 +112,18 @@
     which
     tree
     gnused
-    gamemode
     gnutar
     gawk
     zstd
     gnupg
+    postgresql_18
+    prisma-language-server
     # python315
     # nodejs_24
+
+    # game stuff
+    gamemode
+    rusty-path-of-building
 
     # nix related
     #
@@ -147,6 +152,7 @@
     usbutils # lsusb
     # inputs.zen-browser.packages."${system}".specific
   ];
+  # programs.rusty-path-of-building.enable = true;
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -157,6 +163,7 @@
       name = "JKanaiya";
     };
   };
+
   # SSH Key added to identity
   programs.ssh = {
     enable = true;
