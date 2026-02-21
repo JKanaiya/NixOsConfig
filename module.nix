@@ -9,7 +9,7 @@ inputs: {
   # choose a directory for your config.
   # this can be a string, for if you don't want nix to manage it right now.
   # but be careful, it also doesn't get provisioned by nix if it isnt in the store.
-  config.settings.config_directory = ./plugin/;
+  config.settings.config_directory = ./plugin;
 
   # The makeWrapper options are available
   config.extraPackages = with pkgs; [
