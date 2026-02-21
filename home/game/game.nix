@@ -122,9 +122,9 @@
         lsp = {
           enable = true;
           formatOnSave = true;
-          servers = {
-            typescript.cmd = lib.mkForce ["typescript-language-server" "--sdio"];
-          };
+          # servers = {
+          #   typescript.cmd = lib.mkForce ["typescript-language-server" "--sdio"];
+          # };
         };
 
         options = {

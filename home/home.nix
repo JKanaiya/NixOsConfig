@@ -14,25 +14,37 @@
     # home.nix
     # inputs.zen-browser.homeModules.beta
     inputs.zen-browser.homeModules.twilight
-    inputs.nvf.homeManagerModules.default
+    inputs.noctalia.homeModules.default
+    # inputs.nvf.homeManagerModules.default
     # inputs.nixvim.homeModules.nixvim
     # or inputs.zen-browser.homeModules.twilight-official
     # You can also split up your configuration and import pieces of it here:
-    ./dev/nvf.nix
+    # ./dev/nvf.nix
     ./env/zsh.nix
+    # ./module/module.nix
+    # ./dev/mnw.nix
   ];
 
   programs.zen-browser.enable = true;
   programs.obsidian.enable = true;
-  programs.zathura.enable = true;
+  programs.fuzzel.enable = true;
+  programs.zathura = { enable = true; options = {selection-clipboard = "clipboard";};};
+
+  programs.noctalia-shell = {
+    enable = true;
+    systemd.enable = true;
+  };
+  # programs.mnw = ./dev/mnw.nix;
+  # ld test here
 
   # programs.nixvim = {
   # enable = true;
-  #   # imports = [ inputs.Neve.nixvimModule ];
+  # # imports = [ inputs.Neve.nixvimModule ];
   # # Then configure Nixvim as usual, you might have to lib.mkForce some of the settings
   # colorschemes.catppuccin.enable = lib.mkForce false;
   # colorschemes.nord.enable = true;
   # };
+  xdg.configFile."niri/config.kdl".source = ./niri/config.kdl;
 
   nixpkgs = {
     # You can add overlays here
@@ -64,16 +76,19 @@
       # x11.enable = true; # Enable if using an X11 window manager
       package = pkgs.rose-pine-cursor;
       name = "Everfrost-Cursors"; # The internal name of the theme
-      size = 24;
+      size = 18;
     };
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
+  programs.neovim.enable = true;
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
     obsidian
+    fuzzel
+    mako
+    swaylock
 
     neofetch
     nnn # terminal file manager
@@ -117,9 +132,8 @@
     zstd
     gnupg
     postgresql_18
-    prisma-language-server
+    easyeffects
     # python315
-    # nodejs_24
 
     # game stuff
     gamemode
@@ -130,6 +144,8 @@
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
+
+    gccgo15
 
     # productivity
     hugo # static site generator
@@ -154,6 +170,7 @@
   ];
   # programs.rusty-path-of-building.enable = true;
 
+
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git = {
@@ -174,5 +191,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "26.05";
+  home.stateVersion = "25.11";
 }

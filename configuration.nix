@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  inputs,
   lib,
   ...
 }: {
@@ -15,6 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  home-manager.backupFileExtension = "backup";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -37,8 +39,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  services.postgresql.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
+  services.displayManager.defaultSession = "niri";
   services.desktopManager.gnome.enable = true;
 
   services.xserver.videoDrivers = ["nvidia"];
@@ -109,6 +114,8 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
+  programs.niri.enable = true;
 
   programs.zsh.enable = true;
 
@@ -116,6 +123,8 @@
     enable = true;
     extraCompatPackages = [pkgs.proton-ge-bin];
   };
+
+  programs.hyprland.enable = true;
 
   fonts.packages = with pkgs; [
     noto-fonts
@@ -127,6 +136,7 @@
     mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
+    kitty
   ];
 
   # Allow unfree packages
@@ -137,6 +147,7 @@
   environment.systemPackages = with pkgs; [
     btop
     lutris
+    xwayland-satellite
     bat
     wget
     ghostty
@@ -164,7 +175,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 53317 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
