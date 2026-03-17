@@ -90,7 +90,6 @@
     mako
     swaylock
 
-    neofetch
     nnn # terminal file manager
 
     # archives
@@ -133,11 +132,15 @@
     gnupg
     postgresql_18
     easyeffects
+    dbeaver-bin
+    mongodb-compass
+    mongodb-cli
+    mongodb-tools
+    pavucontrol
     # python315
 
     # game stuff
     gamemode
-    rusty-path-of-building
 
     # nix related
     #
@@ -154,6 +157,7 @@
     btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
+    htop
 
     # system call monitoring
     strace # system call monitoring
@@ -191,5 +195,6 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "25.11";
+  home.stateVersion = "24.05";
+    # system.stateVersion = "24.05"; # Did you read the comment?
 }

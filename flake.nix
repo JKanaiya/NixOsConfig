@@ -2,8 +2,7 @@
   description = "My NixOS Flake Config";
 
   inputs = {
-    # NixOS official package source, using the nixos-25.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -18,6 +17,15 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  };
+  inputs.plugins-lze = {
+    url = "github:BirdeeHub/lze";
+    flake = false;
+  };
+  # These 2 are already in nixpkgs, however this ensures you always fetch the most up to date version!
+  inputs.plugins-lzextras = {
+    url = "github:BirdeeHub/lzextras";
+    flake = false;
   };
 
   outputs = {
@@ -51,6 +59,14 @@
         neovim = self.packages.${system}.default;
       }
     );
+    nixosModules = {
+       default = self.nixosModules.neovim;
+       neovim = wrappers.lib.mkInstallModule {
+         name = "neovim";
+        value = module;
+      };
+    };
+    wrappers.neovim.enable = true;
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
