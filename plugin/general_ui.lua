@@ -1,5 +1,3 @@
-vim.cmd.colorscheme("gruvbox")
-
 vim.g.startuptime_event_width = 0
 vim.g.startuptime_tries = 10
 vim.g.startuptime_exe_path = require(vim.g.nix_info_plugin_name)(vim.v.progpath, "progpath")
@@ -7,11 +5,12 @@ vim.g.startuptime_exe_path = require(vim.g.nix_info_plugin_name)(vim.v.progpath,
 require("mini.pairs").setup()
 require("mini.icons").setup()
 require("mini.ai").setup()
+require("mini.surround").setup()
+require("mini.files").setup()
 
 require("lualine").setup({
 	options = {
 		icons_enabled = false,
-		theme = "onedark",
 		component_separators = "|",
 		section_separators = "",
 	},
@@ -62,3 +61,5 @@ require("which-key").add({
 	{ "<leader>w", group = "[w]orkspace" },
 	{ "<leader>w_", hidden = true },
 })
+
+vim.cmd.colorscheme("gruvbox-material")

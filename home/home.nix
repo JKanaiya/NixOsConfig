@@ -1,4 +1,4 @@
-# This is your home-manager configuration file
+#'' This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
@@ -81,16 +81,47 @@
   };
 
   # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
+  # programs.neovim.enable = true;
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
+    direnv
     obsidian
     fuzzel
     mako
     swaylock
+    appimage-run
+    # libreoffice
+    javaPackages.compiler.openjdk21
+    trino-cli
+
+    oklch-color-picker
+
+    blender
+    vlc
+    vlc-bittorrent
+
+    devenv
+
+    dotnet-sdk_8        # Required to build/run the Blazor server
+    dotnet-runtime_8    
+    xsel                # For clipboard integration
+    libnotify           # Still useful for price alerts
+    libappindicator-gtk3      # Helps the app talk to the system tray
+    librsvg                   # Needed to render SVG icons (common for sidekick)
+
+    dotnet-runtime_8
+    webkitgtk_4_1
+    xsel # Required for clipboard operations
+    icu
+    openssl
+    zlib
+
+    wl-clipboard
 
     nnn # terminal file manager
+
+    awakened-poe-trade
 
     # archives
     zip
@@ -101,6 +132,7 @@
     syncthing
     localsend
     zathura
+    # neovim
 
     # utils
     ripgrep # recursively searches directories for a regex pattern

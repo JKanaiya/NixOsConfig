@@ -16,6 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl."kernel.sysrq" = 502;
   home-manager.backupFileExtension = "backup";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -29,6 +30,11 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  nix.gc = {
+    dates = "weekly";
+    options = "--max-freed $((64 * 1024**3))";
+  };
 
   # Set your time zone.
   time.timeZone = "Africa/Nairobi";
@@ -44,6 +50,8 @@
   services.mongodb = {
     enable = true;
     package = pkgs.mongodb-ce;
+    replSetName = "rs0";
+    bind_ip = "127.0.0.1";
   };
 
   services.postgresql.enable = true;
@@ -52,6 +60,7 @@
   services.displayManager.gdm.enable = true;
   services.displayManager.defaultSession = "niri";
   services.desktopManager.gnome.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
@@ -176,6 +185,7 @@ hardware.bluetooth = {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     btop
+    mongosh
     lutris
     xwayland-satellite
     bat

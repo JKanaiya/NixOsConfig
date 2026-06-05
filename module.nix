@@ -14,6 +14,8 @@ inputs: {
   # The makeWrapper options are available
   config.extraPackages = with pkgs; [
     lazygit
+    ty
+    ruff
     lua-language-server
     tree-sitter
     stylua
@@ -51,8 +53,13 @@ inputs: {
       # to override the plugin name, use `pname`
     }
     onedark-nvim
+    oceanic-material
+    todo-comments-nvim
+    gruvbox-material
     vim-sleuth
     mini-ai
+    mini-files
+    mini-surround
     mini-icons
     mini-pairs
     nvim-lspconfig

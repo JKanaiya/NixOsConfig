@@ -6,7 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    mnw.url = "github:Gerg-L/mnw";
+    # mnw.url = "github:Gerg-L/mnw";
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     wrappers.inputs.nixpkgs.follows = "nixpkgs";
     nvim-treesitter-textobjects = {
@@ -67,7 +67,7 @@
       };
     };
     wrappers.neovim.enable = true;
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+          nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         # Import the previous configuration.nix we used,
@@ -75,11 +75,13 @@
         ./configuration.nix
         ./noctalia.nix
         home-manager.nixosModules.home-manager
+        inputs.self.nixosModules.neovim
         {
           # home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.jonathan = import ./home/home.nix;
+          wrappers.neovim.enable = true;
           # home-manager.user.modules = [./home-manager/home.nix];
 
           # Optionally, use home-manager.extraSpecialArgs to pass

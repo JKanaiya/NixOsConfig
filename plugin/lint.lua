@@ -3,8 +3,8 @@ require("lint").linters_by_ft = {
 	-- and configure them here
 	markdown = { "vale" },
 	-- javascript = { "eslint" },
-	-- typescript = { 'eslint' },
-	python = { "ty" },
+	typescript = { "eslint" },
+	-- python = { "ruff" },
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

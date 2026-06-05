@@ -48,6 +48,7 @@
 
     initContent = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      eval "$(direnv hook zsh)"
     '';
 
     history.size = 10000;

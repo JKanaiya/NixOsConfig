@@ -41,21 +41,6 @@
         "type": "github"
       }
     },
-    "mnw": {
-      "locked": {
-        "lastModified": 1771285028,
-        "narHash": "sha256-mR8GDvGPu1QcI5Ft5lV2CIIh5Og7zRylts+XY3fa/K4=",
-        "owner": "Gerg-L",
-        "repo": "mnw",
-        "rev": "6bd6ab9968c2432c78db4a91c9b1e84dd84fe6b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Gerg-L",
-        "repo": "mnw",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1773476965,
@@ -160,7 +145,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "mnw": "mnw",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects",
