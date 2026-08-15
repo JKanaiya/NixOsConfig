@@ -3,8 +3,7 @@ local cwd = vim.uv.cwd()
 local basename = vim.fs.basename(cwd)
 
 _99.setup({
-	provider = _99.Providers.GeminiCLIProvider,
-	model = "gemma-4-31b",
+	provider = _99.Providers.OpenCodeProvider,
 	logger = {
 		level = _99.DEBUG,
 		path = "/tmp/" .. basename .. ".99.debug",
@@ -13,7 +12,7 @@ _99.setup({
 	tmp_dir = "./tmp",
 	completion = {
 		custom_rules = { "scratch/custom_rules/" },
-		source = "native",
+		source = "blink",
 	},
 	md_files = { "AGENT.md" },
 })

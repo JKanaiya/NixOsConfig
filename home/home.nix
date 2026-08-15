@@ -100,7 +100,7 @@
     blender
     vlc
     vlc-bittorrent
-    gemini-cli
+    opencode
 
     fuse-overlayfs
 
