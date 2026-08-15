@@ -2,7 +2,7 @@
   description = "My NixOS Flake Config";
 
   inputs = {
-    nixpkgs.url = "github:nixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixOS/nixpkgs/26.05";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -20,6 +20,10 @@
   };
   inputs.plugins-lze = {
     url = "github:BirdeeHub/lze";
+    flake = false;
+  };
+  inputs.ninety-nine = {
+    url = "github:ThePrimeagen/99";
     flake = false;
   };
   # These 2 are already in nixpkgs, however this ensures you always fetch the most up to date version!
@@ -61,7 +65,7 @@
     );
     nixosModules = {
        default = self.nixosModules.neovim;
-       neovim = wrappers.lib.mkInstallModule {
+       neovim = wrappers.lib.getInstallModule {
          name = "neovim";
         value = module;
       };

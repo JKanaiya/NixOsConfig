@@ -11,11 +11,14 @@ conform.setup({
 		nix = { "nixfmt" },
 		python = { "ruff_organize_imports", "ruff_format" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		css = { "prettierd", "prettier", stop_after_first = true },
 		html = { "prettierd", "prettier", stop_after_first = true },
 		prisma = { "prisma_fmt" },
+		jsonc = { "fixjson", "jq", stop_after_first = true },
+		json = { "jq" },
 	},
 	-- Adding format-on-save logic here:
 	format_on_save = {

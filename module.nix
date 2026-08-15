@@ -21,6 +21,7 @@ inputs: {
     stylua
     nixd
     alejandra
+    vscode-js-debug
     gccgo13
     gcc
     gnumake
@@ -52,14 +53,23 @@ inputs: {
       # the spec name is not the plugin name.
       # to override the plugin name, use `pname`
     }
+    {
+    data = config.nvim-lib.mkPlugin "99" inputs.ninety-nine;
+    name = "99";
+    before = ["INIT_MAIN"];
+    }
+
     onedark-nvim
     oceanic-material
     todo-comments-nvim
+    nvim-dap-vscode-js
     gruvbox-material
     vim-sleuth
     mini-ai
     mini-files
     mini-surround
+    mini-snippets
+    friendly-snippets
     mini-icons
     mini-pairs
     nvim-lspconfig
@@ -69,6 +79,7 @@ inputs: {
     lualine-lsp-progress
     gitsigns-nvim
     which-key-nvim
+    (config.nvim-lib.mkPlugin "99" inputs.ninety-nine)
     nvim-lint
     noice-nvim
     nui-nvim

@@ -13,7 +13,7 @@
     zsh-completions
     zsh-fast-syntax-highlighting
     zsh-z
-    # zsh-history-search-multi-word
+    zsh-history-search-multi-word
     zsh-history-substring-search
     zsh-powerlevel10k
 
@@ -44,6 +44,7 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
       j = "z";
+      y = "yazi";
     };
 
     initContent = ''

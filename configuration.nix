@@ -65,6 +65,8 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
 
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = 0;
+
 hardware.bluetooth = {
   enable = true;
   powerOnBoot = true;
@@ -90,11 +92,13 @@ hardware.bluetooth = {
 
   hardware.nvidia = {
     modesetting.enable = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     open = false;
     prime = {
       sync.enable = true;
       intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+      nvidiaBusId = "PCI:1:00:0";
     };
   };
 

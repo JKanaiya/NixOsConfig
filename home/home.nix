@@ -11,13 +11,13 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
-    # home.nix
-    # inputs.zen-browser.homeModules.beta
-    inputs.zen-browser.homeModules.twilight
+   # home.nix
+     inputs.zen-browser.homeModules.beta
+    # inputs.zen-browser.homeModules.twilight
     inputs.noctalia.homeModules.default
     # inputs.nvf.homeManagerModules.default
     # inputs.nixvim.homeModules.nixvim
-    # or inputs.zen-browser.homeModules.twilight-official
+    # inputs.zen-browser.homeModules.twilight-official
     # You can also split up your configuration and import pieces of it here:
     # ./dev/nvf.nix
     ./env/zsh.nix
@@ -100,17 +100,33 @@
     blender
     vlc
     vlc-bittorrent
+    gemini-cli
 
+    fuse-overlayfs
+
+    espeak
+    espeak-ng
+
+    alsa-utils
+
+    prettierd
+    prettier
+    fixjson
+
+    gawk
     devenv
 
     dotnet-sdk_8        # Required to build/run the Blazor server
-    dotnet-runtime_8    
+    # dotnet-runtime_8    
     xsel                # For clipboard integration
     libnotify           # Still useful for price alerts
     libappindicator-gtk3      # Helps the app talk to the system tray
     librsvg                   # Needed to render SVG icons (common for sidekick)
 
-    dotnet-runtime_8
+    lshw
+
+    godot
+
     webkitgtk_4_1
     xsel # Required for clipboard operations
     icu
@@ -119,7 +135,10 @@
 
     wl-clipboard
 
-    nnn # terminal file manager
+    # terminal file manager
+    yazi
+    # book reader
+    foliate
 
     awakened-poe-trade
 
@@ -228,5 +247,5 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
-    # system.stateVersion = "24.05"; # Did you read the comment?
+  # system.stateVersion = "24.05"; # Did you read the comment?
 }

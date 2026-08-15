@@ -3,6 +3,8 @@ vim.g.startuptime_tries = 10
 vim.g.startuptime_exe_path = require(vim.g.nix_info_plugin_name)(vim.v.progpath, "progpath")
 
 require("mini.pairs").setup()
+require("mini.snippets").setup()
+-- require("mini.completion").setup()
 require("mini.icons").setup()
 require("mini.ai").setup()
 require("mini.surround").setup()
