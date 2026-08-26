@@ -43,17 +43,17 @@
     module = nixpkgs.lib.modules.importApply ./module.nix inputs;
     wrapper = wrappers.lib.evalModule module;
   in {
+    wrapperModules = {
+      neovim = module;
+      default = self.wrapperModules.neovim;
+    };
+    wrappers = {
+      neovim = wrapper.config;
+      default = self.wrappers.neovim;
+    };
     overlays = {
       default = final: prev: {neovim = wrapper.config.wrap {pkgs = final;};};
       neovim = self.overlays.default;
-    };
-    wrapperModules = {
-      default = module;
-      neovim = self.wrapperModules.default;
-    };
-    wrappedModules = {
-      default = wrapper.config;
-      neovim = self.wrappedModules.default;
     };
     packages = forAllSystems (
       system: let
@@ -70,8 +70,7 @@
         value = module;
       };
     };
-    wrappers.neovim.enable = true;
-          nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         # Import the previous configuration.nix we used,

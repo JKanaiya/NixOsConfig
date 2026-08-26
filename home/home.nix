@@ -86,6 +86,7 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
     direnv
+    csharpier
     obsidian
     fuzzel
     mako
@@ -97,8 +98,12 @@
 
     oklch-color-picker
 
+    imagemagick
     blender
+    vivaldi
+    fastfetch
     vlc
+    pastel
     vlc-bittorrent
     opencode
 
@@ -116,7 +121,10 @@
     gawk
     devenv
 
-    dotnet-sdk_8        # Required to build/run the Blazor server
+    dotnet-sdk
+    # csharp-ls
+    omnisharp-roslyn
+    vscode
     # dotnet-runtime_8    
     xsel                # For clipboard integration
     libnotify           # Still useful for price alerts
@@ -125,7 +133,7 @@
 
     lshw
 
-    godot
+    godot-mono
 
     webkitgtk_4_1
     xsel # Required for clipboard operations

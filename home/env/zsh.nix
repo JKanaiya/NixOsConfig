@@ -41,7 +41,7 @@
     ];
 
     shellAliases = {
-      ll = "ls -l";
+      ll = "ls -lh";
       update = "sudo nixos-rebuild switch";
       j = "z";
       y = "yazi";
