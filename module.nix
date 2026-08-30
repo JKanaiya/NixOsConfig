@@ -9,7 +9,7 @@ options,
   imports = [wlib.wrapperModules.neovim];
   # choose a directory for your config.
   # this can be a string, for if you don't want nix to manage it right now.
-  # but be careful, it also doesn't get provisioned by nix if it isnt in the store.
+  # but be careful, it also doesn't get frovisioned by nix if it isnt in the store.
   config.settings.config_directory = ./.;
 
   options.nvim-lib.neovimPlugins = lib.mkOption {
@@ -114,7 +114,7 @@ options,
     vim-godot
     oceanic-material
     todo-comments-nvim
-    nvim-dap-vscode-js
+    # nvim-dap-vscode-js
     gruvbox-material
     vim-sleuth
     mini-ai
