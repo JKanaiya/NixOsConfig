@@ -63,7 +63,7 @@ options,
   ];
 
   # The makeWrapper options are available
-  config.extraPackages = with pkgs; [
+  config.runtimePkgs = with pkgs; [
     lazygit
     ty
     ruff
@@ -153,7 +153,7 @@ options,
     ))
   ];
 
-  config.runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [ ])) [ ];
+  # config.runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [ ])) [ ];
 
   # Inform our lua of which top level specs are enabled
   options.settings.cats = lib.mkOption {

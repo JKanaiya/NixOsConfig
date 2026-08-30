@@ -1,11 +1,24 @@
-require("plugins.ai")
-require("plugins.completion")
-require("plugins.debug")
-require("plugins.format")
-require("plugins.general_ui")
-require("plugins.gitsigns")
-require("plugins.lint")
-require("plugins.lsp")
-require("plugins.noice")
-require("plugins.snacks")
-require("plugins.treesitter")
+-- require("plugins.ai")
+-- require("plugins.completion")
+-- require("plugins.debug")
+-- require("plugins.format")
+-- require("plugins.general_ui")
+-- require("plugins.gitsigns")
+-- require("plugins.lint")
+-- require("plugins.lsp")
+-- require("plugins.noice")
+-- require("plugins.snacks")
+-- require("plugins.treesitter")
+--
+return {
+	{ import = "plugins.ai" },
+	{ import = "plugins.godot" },
+	{ import = "plugins.completion" },
+	{ import = "plugins.debug" },
+	{ import = "plugins.format" },
+	{ import = "plugins.gitsigns" },
+	{ import = "plugins.lint" },
+	{ import = "plugins.lsp" },
+	{ import = "plugins.snacks" },
+	{ import = "plugins.treesitter" },
+}
