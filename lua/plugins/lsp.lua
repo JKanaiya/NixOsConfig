@@ -9,8 +9,17 @@ return {
 		-- most don't need much configuration
 		servers.gopls = {}
 		servers.ts_ls = {}
-		servers.csharp_ls = {
+		-- servers.csharp_ls = {
+		-- 	root_markers = { "project.godot", "*.sln", "*.csproj", ".cs" },
+		-- }
+		servers.omnisharp = {
+			cmd = { "OmniSharp", "--languageserver" },
+			filetypes = { "cs" },
 			root_markers = { "project.godot", "*.sln", "*.csproj" },
+			-- Optional: enable for large projects
+			-- init_options = {
+			--   maxProjectFileCount = 5000,
+			-- },
 		}
 
 		-- Godot GDScript LSP (manual connection via netcat)

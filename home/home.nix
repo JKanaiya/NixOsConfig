@@ -87,6 +87,7 @@
     # feel free to add your own or remove some of them
     direnv
     csharpier
+    uncrustify
     obsidian
     fuzzel
     mako
@@ -121,11 +122,10 @@
     gawk
     devenv
 
-    dotnet-sdk
-    # csharp-ls
+    dotnet-sdk_10
     omnisharp-roslyn
     vscode
-    # dotnet-runtime_8    
+    # csharp-ls
     xsel                # For clipboard integration
     libnotify           # Still useful for price alerts
     libappindicator-gtk3      # Helps the app talk to the system tray

@@ -27,12 +27,12 @@ return {
 				prisma = { "prisma_fmt" },
 				jsonc = { "fixjson", "jq", stop_after_first = true },
 				json = { "fixjson", "jq", stop_after_first = true },
-				cs = { "csharpier" },
+				cs = { "uncrustify", "csharpier", stop_after_first = true },
 			},
 			-- Adding format-on-save logic here:
 			format_on_save = {
 				-- These options are passed to conform.format()
-				timeout_ms = 5000,
+				timeout_ms = 3000,
 				lsp_fallback = true,
 				lsp_format = "fallback",
 			},

@@ -12,6 +12,7 @@ options,
   # but be careful, it also doesn't get frovisioned by nix if it isnt in the store.
   config.settings.config_directory = ./.;
 
+
   options.nvim-lib.neovimPlugins = lib.mkOption {
     readOnly = true;
     type = lib.types.attrsOf wlib.types.stringable;
@@ -114,7 +115,7 @@ options,
     vim-godot
     oceanic-material
     todo-comments-nvim
-    # nvim-dap-vscode-js
+    nvim-dap-vscode-js
     gruvbox-material
     vim-sleuth
     mini-ai

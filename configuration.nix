@@ -18,6 +18,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernel.sysctl."kernel.sysrq" = 502;
   home-manager.backupFileExtension = "backup";
+  environment.variables = { UNCRUSTIFY_CONFIG = "/home/jonathan/configs/uncrustify.cfg";
+ VSCODE_JS_DEBUG_PATH = "${pkgs.vscode-js-debug}/lib/node_modules/js-debug/src/vsDebugServer.ts";
+  };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
